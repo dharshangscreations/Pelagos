@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pelagos — Your Sanctuary In The Ocean</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'ZTBros';
+    src: url('uploads/ZTBrosOskon90s-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Berlingske';
+    src: url('uploads/BerlingskeSerif-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #04091a;
+    --deep: #060d22;
+    --mid: #0b1730;
+    --surface: #111e3a;
+    --glass: rgba(6,13,34,0.72);
+    --border: rgba(255,255,255,0.10);
+    --accent: oklch(0.65 0.12 210);
+    --accent2: oklch(0.65 0.12 175);
+    --white: #f0ede8;
+    --dim: rgba(240,237,232,0.55);
+    --serif: 'ZTBros', Georgia, serif;
+    --sans: 'Berlingske', 'DM Sans', sans-serif;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ── SCROLL CONTAINER ── */
+  #scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  #scroll-container::-webkit-scrollbar { display: none; }
+
+  /* ── SECTIONS ── */
+  .section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 80px 0;
+  }
+
+  /* ── SECTION BACKGROUNDS ── */
+  .bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    transition: transform 0.6s ease;
+  }
+
+  /* S1 — Hero: cityscape image */
+  #s1 .bg {
+    background: url('uploads/Hero shot stars.png') center center / cover no-repeat;
+    transform: scaleX(-1);
+  }
+  #s1 .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: scaleX(-1);
+    background: linear-gradient(180deg,
+      rgba(4,9,26,0.25) 0%,
+      rgba(4,9,26,0.15) 40%,
+      rgba(4,9,26,0.55) 75%,
+      rgba(4,9,26,0.85) 100%
+    );
+  }
+
+  /* S2 — Vision */
+  #s2 .bg {
+    background: url('uploads/cityscape final morning.png') center center / cover no-repeat;
+    transform: scaleX(-1);
+  }
+  #s2 .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: scaleX(-1);
+    background: linear-gradient(180deg, rgba(4,9,26,0.45) 0%, rgba(4,9,26,0.35) 40%, rgba(4,9,26,0.75) 100%);
+  }
+
+  /* S3 — Experience */
+  #s3 .bg {
+    background: url('uploads/260424-010143-WhatsApp_Image_2026-04-23_at_10.49.17_1.png.png') center center / cover no-repeat;
+  }
+  #s3 .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(4,9,26,0.3) 0%, rgba(4,9,26,0.2) 40%, rgba(4,9,26,0.7) 100%);
+  }
+
+  /* S4 — Ecosystem */
+  #s4 .bg {
+    background: url('uploads/260424-013018-WhatsApp_Image_2026-04-23_at_10.52.22_1.png.png') center center / cover no-repeat;
+  }
+  #s4 .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(4,9,26,0.3) 0%, rgba(4,9,26,0.2) 40%, rgba(4,9,26,0.7) 100%);
+  }
+
+  /* S5 — Membership */
+  #s5 .bg {
+    background: url('uploads/260424-011050-WhatsApp_Image_2026-04-23_at_10.51.33_1.png.png') center center / cover no-repeat;
+  }
+  #s5 .bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(4,9,26,0.3) 0%, rgba(4,9,26,0.2) 40%, rgba(4,9,26,0.7) 100%);
+  }
+
+  /* S6 — Contact */
+  #s6 .bg {
+    background: linear-gradient(180deg, #030810 0%, #04091a 100%);
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  .section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 128px;
+    pointer-events: none;
+  }
+
+  .section-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 80px 0 80px;
+  }
+
+  /* ── COORDINATES ── */
+  .coords {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    color: var(--dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  /* ── HEADLINE ── */
+  .headline {
+    font-family: var(--serif);
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    max-width: 600px;
+    margin-bottom: 24px;
+  }
+  .headline em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ── BODY TEXT ── */
+  .body-text {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--dim);
+    max-width: 320px;
+    margin-bottom: 40px;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── CTA BUTTON ── */
+  .btn {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 14px 32px;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+  .btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.6);
+  }
+  .btn.primary {
+    background: rgba(255,255,255,0.07);
+  }
+
+  /* ── NAV ── */
+  #nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 40px;
+    pointer-events: none;
+  }
+  #nav > * { pointer-events: all; }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  /* ── MENU TOGGLE ── */
+  #menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--white);
+    padding: 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    user-select: none;
+  }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 24px;
+  }
+  .hamburger span {
+    display: block;
+    height: 1px;
+    background: var(--white);
+    transition: all 0.35s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0; transform: scaleX(0);
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* ── INQUIRE BUTTON ── */
+  #inquire-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.45);
+    padding: 10px 24px;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  #inquire-btn:hover { background: rgba(255,255,255,0.08); }
+
+  /* ── SIDE MENU DRAWER ── */
+  #side-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 420px;
+    height: 100vh;
+    background: rgba(4, 9, 26, 0.97);
+    backdrop-filter: blur(24px);
+    z-index: 99;
+    transform: translateX(-100%);
+    transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 120px 48px 60px 48px;
+  }
+  #side-menu.open { transform: translateX(0); }
+
+  .menu-nav-item {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color 0.25s ease, padding-left 0.25s ease;
+    opacity: 0.7;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .menu-nav-item:hover { opacity: 1; padding-left: 8px; }
+  .menu-nav-item.active { opacity: 1; color: var(--accent); }
+
+  .menu-index {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+
+  .menu-footer {
+    margin-top: auto;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: rgba(240,237,232,0.3);
+    text-transform: uppercase;
+  }
+
+  /* ── OVERVIEW PANEL ── */
+  #overview-panel {
+    position: fixed;
+    top: 100px;
+    right: 36px;
+    width: 342px;
+    height: 601px;
+    background: rgba(8,14,32,0.97);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-bottom: none;
+    z-index: 110;
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transform: translateX(0);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  #overview-panel.hidden {
+    transform: translateX(calc(100% + 36px));
+    pointer-events: none;
+  }
+
+  .overview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    flex-shrink: 0;
+  }
+  .overview-header span {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.8);
+  }
+  .overview-close {
+    background: none;
+    border: none;
+    color: rgba(240,237,232,0.55);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 2px 6px;
+    transition: color 0.2s;
+  }
+  .overview-close:hover { color: #f0ede8; }
+
+  .overview-subtitle {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(240,237,232,0.65);
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    flex-shrink: 0;
+    line-height: 1.5;
+  }
+
+  .overview-img {
+    width: 100%;
+    height: 140px;
+    background: url('uploads/pasted-1777134688126-0.png') center center / cover no-repeat;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .overview-img::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .overview-body {
+    padding: 16px 16px 20px;
+    flex: 1;
+  }
+  .overview-section-label {
+    display: none;
+  }
+  .overview-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .overview-desc {
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: rgba(240,237,232,0.55);
+    margin-bottom: 20px;
+    white-space: pre-line;
+  }
+  }
+
+  /* ── OVERVIEW TOGGLE ── */
+  #overview-toggle {
+    position: fixed !important;
+    bottom: 40px !important;
+    right: 40px !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: 111;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(8,14,32,0.82);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.22);
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  #overview-toggle:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  /* ── BOTTOM BAR ── */
+  #bottom-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px 28px 40px;
+    pointer-events: none;
+  }
+  #bottom-bar > * { pointer-events: all; }
+
+
+
+  .scroll-hint {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 0.4s;
+  }
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(180deg, var(--dim) 0%, transparent 100%);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(0.5); opacity: 1; }
+  }
+
+  .slide-counter {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── PROGRESS DOTS ── */
+  #progress-dots {
+    position: fixed;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .dot.active {
+    background: var(--white);
+    transform: scale(1.5);
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  /* ── DIVIDER LINE ── */
+  .h-line {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    margin-bottom: 32px;
+  }
+
+  /* ── SECTION 2: VISION ── */
+  #s2 .section-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    padding-bottom: 100px;
+  }
+  .vision-number {
+    font-family: var(--serif);
+    font-size: 140px;
+    font-weight: 300;
+    line-height: 1;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -0.04em;
+    position: absolute;
+    top: 50%;
+    left: 80px;
+    transform: translateY(-60%);
+    user-select: none;
+    pointer-events: none;
+  }
+  .vision-stat {
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    margin-bottom: 2px;
+  }
+  .vision-stat-num {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  .vision-stat-label {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 4px;
+  }
+
+  /* ── SECTION 3: EXPERIENCE ── */
+  .experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-bottom: 0;
+    border-top: 1px solid var(--border);
+  }
+  .exp-card {
+    padding: 32px 32px 32px 0;
+    border-right: 1px solid var(--border);
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .exp-card:last-child { border-right: none; padding-right: 0; }
+  .exp-card:hover { background: rgba(255,255,255,0.02); }
+  .exp-number {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+  }
+  .exp-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .exp-desc {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--dim);
+  }
+
+  /* ── SECTION 4: ECOSYSTEM ── */
+  .ecosystem-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 120px;
+    align-items: end;
+  }
+  .eco-visual {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45vw;
+    height: 60vh;
+    z-index: 1;
+  }
+  .eco-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #040e20 0%, #061828 60%, #040c18 100%);
+    border-left: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .eco-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255,255,255,0.02) 48px, rgba(255,255,255,0.02) 49px),
+      repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255,255,255,0.02) 48px, rgba(255,255,255,0.02) 49px);
+  }
+
+  /* ── SECTION 5: MEMBERSHIP ── */
+  .membership-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .tier {
+    padding: 36px 36px 36px 0;
+    border-right: 1px solid var(--border);
+    cursor: default;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier:last-child { border-right: none; }
+  .tier::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 36px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .tier:hover::after { transform: scaleX(1); }
+  .tier:hover { background: rgba(255,255,255,0.02); }
+  .tier-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+  .tier-price {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .tier-price sup {
+    font-size: 20px;
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+  .tier-period {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 24px;
+  }
+  .tier-features {
+    list-style: none;
+  }
+  .tier-features li {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--dim);
+    padding: 6px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .tier-features li::before {
+    content: '— ';
+    color: var(--accent);
+  }
+
+  /* ── SECTION 6: CONTACT ── */
+  #s6 {
+    justify-content: flex-start;
+    align-items: center;
+  }
+  #s6 .section-content {
+    text-align: center;
+    padding: 100px 80px 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #s6 .headline {
+    max-width: 700px;
+    font-size: clamp(52px, 7vw, 96px);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 440px;
+    margin-top: 48px;
+  }
+  .form-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .form-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+  }
+  .form-field label {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .form-field input, .form-field select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    padding: 10px 0;
+    outline: none;
+    transition: border-color 0.25s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .form-field input:focus, .form-field select:focus {
+    border-bottom-color: rgba(255,255,255,0.6);
+  }
+  .form-field select option {
+    background: #04091a;
+    color: var(--white);
+  }
+  .form-submit {
+    margin-top: 32px;
+    width: 100%;
+  }
+
+  /* ── SECTION TRANSITIONS ── */
+  .section-content > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .section.in-view .section-content > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .section.in-view .section-content > *:nth-child(2) { transition-delay: 0.1s; }
+  .section.in-view .section-content > *:nth-child(3) { transition-delay: 0.2s; }
+  .section.in-view .section-content > *:nth-child(4) { transition-delay: 0.3s; }
+  .section.in-view .section-content > *:nth-child(5) { transition-delay: 0.35s; }
+
+  /* Also animate bg big number */
+  .vision-number {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  #s2.in-view .vision-number { opacity: 1; }
+
+  #ov-btn {
+    display: block;
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 14px 16px;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.25s;
+    margin-top: auto;
+  }
+  #ov-btn:hover { background: rgba(255,255,255,0.08); }
+  #overview-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 109;
+    background: rgba(4,9,26,0.5);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  #overview-backdrop.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  #overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 98;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(2px);
+  }
+  #overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* ── ACTIVE SECTION LINE ── */
+  #active-line {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    width: 3px;
+    height: 60px;
+    background: var(--accent);
+    transform: translateY(-50%);
+    z-index: 81;
+    transition: top 0.4s ease;
+    opacity: 0.6;
+  }
+
+  /* Placeholder images */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.18);
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px),
+      linear-gradient(135deg, #041020 0%, #06142a 100%);
+  }
+
+  /* Tagline */
+  .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--dim);
+    letter-spacing: 0.02em;
+    margin-bottom: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div style="display:flex; align-items:center; gap:40px;">
+    <button id="menu-toggle" aria-label="Menu">
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      MENU
+    </button>
+  </div>
+  <img src="uploads/PelagosLOGO1024x1024.png" alt="Pelagos" style="height:64px; width:64px;">
+
+</nav>
+
+<!-- SIDE MENU OVERLAY -->
+<div id="overlay" onclick="closeMenu()"></div>
+
+<!-- SIDE MENU -->
+<div id="side-menu">
+  <div id="menu-nav">
+    <div class="menu-nav-item active" onclick="goToSection(0); closeMenu()"><span class="menu-index">01</span>Sanctuary</div>
+    <div class="menu-nav-item" onclick="goToSection(1); closeMenu()"><span class="menu-index">02</span>The Surface</div>
+    <div class="menu-nav-item" onclick="goToSection(2); closeMenu()"><span class="menu-index">03</span>The Farms Below</div>
+    <div class="menu-nav-item" onclick="goToSection(3); closeMenu()"><span class="menu-index">04</span>The Machine Heart</div>
+    <div class="menu-nav-item" onclick="goToSection(4); closeMenu()"><span class="menu-index">05</span>The Deep Ballast</div>
+    <div class="menu-nav-item" onclick="goToSection(5); closeMenu()"><span class="menu-index">06</span>Inquire</div>
+  </div>
+  <div class="menu-footer">
+    25.2048° N, 55.2708° E<br>
+    Pelagos Ocean Sanctuary © 2026
+  </div>
+</div>
+
+<!-- PROGRESS DOTS -->
+<div id="progress-dots">
+  <div class="dot active" onclick="goToSection(0)"></div>
+  <div class="dot" onclick="goToSection(1)"></div>
+  <div class="dot" onclick="goToSection(2)"></div>
+  <div class="dot" onclick="goToSection(3)"></div>
+  <div class="dot" onclick="goToSection(4)"></div>
+  <div class="dot" onclick="goToSection(5)"></div>
+</div>
+
+<!-- OVERVIEW PANEL -->
+<div id="overview-panel" class="hidden" style="height: 530px; padding: 0px 0px 155.333px; margin: 0px 0px 8.66675px">
+  <div class="overview-header">
+    <span>Overview</span>
+    <button class="overview-close" onclick="toggleOverview()">×</button>
+  </div>
+  <div class="overview-img" id="overview-img" data-label="Visual Placeholder" style="height: 170px"></div>
+  <div class="overview-body">
+    <div class="overview-section-label" id="ov-section">01 — Sanctuary</div>
+    <div class="overview-title" id="ov-title">Humanity's Next Frontier</div>
+    <div class="overview-desc" id="ov-desc"></div>
+    <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08);">
+      <button onclick="openResidence();" id="ov-btn" style="font-family:var(--sans); font-size:10px; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); border:1px solid rgba(255,255,255,0.3); padding:10px 20px; background:transparent; cursor:pointer; width:100%; transition:background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'" onmouseout="this.style.background='transparent'">THE VISION →</button>
+    </div>
+</div>
+</div>
+
+
+
+<!-- SCROLL CONTAINER -->
+<div id="scroll-container">
+
+  <!-- SECTION 1: HERO -->
+  <section class="section" id="s1" data-index="0">
+    <div class="bg"></div>
+    <div class="section-content" style="padding-top:0; padding-bottom:0; justify-content:flex-end; display:flex; flex-direction:column; position:absolute; top:0; left:0; right:0; bottom:22%; z-index:2; padding-left:80px; padding-right:80px; max-width:600px;">
+      <span class="coords" style="color:rgb(255,255,255); margin-bottom:8px;">25.2048° N, 55.2708° E</span>
+      <h1 class="headline">Your Sanctuary<br><em>In The Ocean</em></h1>
+    </div>
+  </section>
+
+  <!-- SECTION 2: VISION -->
+  <section class="section" id="s2" data-index="1">
+    <div class="bg"></div>
+    <div class="section-content" style="padding-bottom: 80px; text-align: left">
+      <span class="section-label" style="font-size:16px; color:rgb(172,172,172);">Level 0</span>
+      <h2 class="headline" style="margin-bottom:0;">The<br><em>Surface</em></h2>
+    </div>
+  </section>
+  </section>
+
+  <!-- SECTION 3: EXPERIENCE -->
+  <section class="section" id="s3" data-index="2">
+    <div class="bg"></div>
+    <div class="section-content" style="padding-bottom:0;">
+      <span class="section-label" style="font-size:16px; color:rgb(172,172,172);">Level 1</span>
+      <h2 class="headline" style="margin-bottom:0;">The Farms<br><em>Below</em></h2>
+    </div>
+  </section>
+
+  <!-- SECTION 4: ECOSYSTEM -->
+  <section class="section" id="s4" data-index="3">
+    <div class="bg"></div>
+    <div class="section-content" style="padding-bottom:0;">
+      <span class="section-label" style="font-size:16px; color:rgb(172,172,172);">Level 2</span>
+      <h2 class="headline" style="max-width:440px; margin-bottom:0;">The Machine<br><em>Heart</em></h2>
+    </div>
+  </section>
+
+  <!-- SECTION 5: MEMBERSHIP -->
+  <section class="section" id="s5" data-index="4">
+    <div class="bg"></div>
+    <div class="section-content" style="padding-bottom:0;">
+      <span class="section-label" style="font-size:16px; color:rgb(172,172,172);">Level 3</span>
+      <h2 class="headline" style="max-width:440px; margin-bottom:0;">The Deep<br><em>Ballast</em></h2>
+    </div>
+  </section>
+
+  <!-- SECTION 6: CONTACT -->
+  <section class="section" id="s6" data-index="5">
+    <div class="bg"></div>
+    <div class="section-content">
+
+      <h2 class="headline" style="font-size:clamp(52px,6vw,88px); max-width:660px; text-align:center;"><em>Begin Your</em><br>Journey Below</h2>
+      <p class="body-text" style="text-align:center; max-width:400px;">Express your interest and a Pelagos curator will reach out to guide you through the founding membership process.</p>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Alexandra">
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Mercer">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+        </div>
+        <button type="submit" class="btn primary form-submit" style="text-transform:none;">Join Pelagos</button>
+      </form>
+      <div id="form-success" style="display:none; text-align:center; margin-top:32px;">
+        <div style="font-family:var(--serif); font-size:28px; font-weight:300; margin-bottom:12px;"><em>Thank You</em></div>
+        <p style="font-size:12px; color:var(--dim); letter-spacing:0.1em;">A Pelagos curator will be in touch within 48 hours.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /scroll-container -->
+
+<!-- BOTTOM BAR -->
+<div id="bottom-bar">
+
+  <div class="scroll-hint" id="scroll-hint">Scroll Down</div>
+  <div class="slide-counter"><span id="current-slide">01</span> / 06</div>
+</div>
+
+<script>
+  let currentSection = 0;
+  let menuOpen = false;
+  let overviewOpen = false;
+  let totalSections = 6;
+
+  const sectionData = [
+    {
+      label: '01 — Sanctuary',
+      title: 'Humanity\'s Next Frontier',
+      desc: 'Fifty years ago, we built cities at the edge of the ocean and called it ambition. For the 200 million of us displaced by the rising tides. We bring to you PELAGOS, our answer to making the ocean our home. A megastructure like never before.\n\nPelagos is not a single vessel, but composed of modular sectors that can dock together or separate as needed. We call it a "living constellation." Each neighborhood is capable of surviving alone, yet we choose to be together.\nLife on the surface deck is designed to be deliberately unhurried.',
+      cta: 'Join Us Now',
+      imgColor: 'url(\'uploads/pasted-1777134688126-0.png\') center center / cover no-repeat'
+    },
+    {
+      label: 'Level 1',
+      title: 'Above The Waters',
+      desc: 'Explore the sunlit deck of our floating metropolis, where 40,000 residents live in modular, interlocking neighborhoods. Here, you will learn about our egalitarian "No Towers" rule that ensures shared skies, the vibrant communal "Third Spaces," and the profound psychological release found at "The Margin"—the unadorned wooden walkway at the absolute edge where the city meets the vast Atlantic.',
+      cta: 'Explore Vision',
+      imgColor: 'linear-gradient(180deg, #040e22 0%, #030a1a 100%)'
+    },
+    {
+      label: '03 — The Farms Below',
+      title: 'Life Below The Shine',
+      desc: 'Descend below the waterline to Layer 1, the sun-drenched agricultural epicenter of Pelagos. This section details our advanced High-Density Vertical Growth systems and algae bioreactors, which are flooded with natural daylight piped down from the surface using thousands of glowing fiber-optic cables, ensuring absolute food security while citizens watch the marine life swim just beyond the reinforced glass.',
+      cta: 'See More',
+      imgColor: 'linear-gradient(180deg, #040c20 0%, #050e22 100%)'
+    },
+    {
+      label: 'Level 2',
+      title: 'The Factory Level',
+      desc: 'Step into the industrial powerhouse of the city, where structural transparency allows every citizen to observe the metabolic processes keeping the megastructure alive. Learn how Pelagos harnesses Ocean Thermal Energy Conversion (OTEC) and hybrid desalination systems to generate clean electricity and limitless fresh water from the temperature differences of the ocean, all set to the comforting, continuous hum of our survival.',
+      cta: 'Our Commitment',
+      imgColor: 'linear-gradient(180deg, #040e1a 0%, #061420 100%)'
+    },
+    {
+      label: 'Level 3',
+      title: 'The Deep Oceans',
+      desc: 'Journey into the dark, crushing depths of Layer 3, the foundational brain and central nervous system of our megastructure. This area highlights the massive gyroscopic stabilization columns and the advanced computational AI that reads weather and ecological patterns to autonomously guide our migrations, strictly enforcing the Overstay Charter to maintain perfect harmony with the marine biosphere.',
+      cta: 'View Tiers',
+      imgColor: 'linear-gradient(180deg, #050d20 0%, #040a1a 100%)'
+    },
+    {
+      label: '06 — Inquire',
+      title: 'Time To Set Our Sights On The Vast Horizons',
+      desc: 'Connect with the operators, marine engineers, and Light-Stewards of our nomadic civilization. Whether you are looking to understand more about our algorithmic migration routes, the ancestral navigational wisdom we employ, or how our society functions away from the old terrestrial world, this section provides the channels to reach out and learn more about life on the tide.',
+      cta: 'Inquire Now',
+      imgColor: 'linear-gradient(180deg, #030810 0%, #04091a 100%)'
+    }
+  ];
+
+  function goToSection(index) {
+    const container = document.getElementById('scroll-container');
+    container.scrollTo({ top: index * window.innerHeight, behavior: 'smooth' });
+  }
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('side-menu').classList.toggle('open', menuOpen);
+    document.getElementById('overlay').classList.toggle('show', menuOpen);
+    document.getElementById('hamburger').classList.toggle('open', menuOpen);
+  }
+
+  function closeMenu() {
+    menuOpen = false;
+    document.getElementById('side-menu').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  function toggleOverview() {
+    overviewOpen = !overviewOpen;
+    document.getElementById('overview-panel').classList.toggle('hidden', !overviewOpen);
+    document.getElementById('overview-backdrop').classList.toggle('show', overviewOpen);
+    document.getElementById('overview-toggle').style.opacity = overviewOpen ? '0' : '1';
+    document.getElementById('overview-toggle').style.pointerEvents = overviewOpen ? 'none' : 'all';
+  }
+
+
+  function updateOverview(index) {
+    const d = sectionData[index];
+    document.getElementById('ov-section').textContent = d.label;
+    document.getElementById('ov-title').textContent = d.title;
+    document.getElementById('ov-desc').textContent = d.desc;
+    const ctaEl = document.getElementById('ov-cta'); if (ctaEl) ctaEl.textContent = d.cta;
+    document.getElementById('overview-img').style.background = d.imgColor;
+  }
+
+  function updateUI(index) {
+    currentSection = index;
+
+    // slide counter
+    document.getElementById('current-slide').textContent = String(index + 1).padStart(2, '0');
+
+    // scroll hint visibility
+    document.getElementById('scroll-hint').style.opacity = index === totalSections - 1 ? '0' : '1';
+
+    // progress dots
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+
+    // menu items
+    document.querySelectorAll('.menu-nav-item').forEach((item, i) => item.classList.toggle('active', i === index));
+
+    // update overview toggle number
+    const togNum = document.getElementById('ov-toggle-num');
+    if (togNum) togNum.textContent = String(index + 1).padStart(2, '0');
+
+    // overview
+    updateOverview(index);
+
+    // save to localStorage
+    try { localStorage.setItem('pelagos_section', index); } catch(e) {}
+  }
+
+  // Intersection observer
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        const index = parseInt(entry.target.dataset.index);
+        updateUI(index);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      e.preventDefault();
+      goToSection(Math.min(currentSection + 1, totalSections - 1));
+    }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      goToSection(Math.max(currentSection - 1, 0));
+    }
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+
+  // Restore scroll position
+  window.addEventListener('load', () => {
+    try {
+      const saved = localStorage.getItem('pelagos_section');
+      if (saved !== null) {
+        const idx = parseInt(saved);
+        if (!isNaN(idx) && idx > 0) {
+          setTimeout(() => goToSection(idx), 100);
+        }
+      }
+    } catch(e) {}
+    sections[0].classList.add('in-view');
+  });
+</script>
+
+<!-- RESIDENCE OVERLAY -->
+<div id="residence-overlay" style="position:fixed; inset:0; z-index:200; background:#f5f2ee; transform:translateY(110%); transition:transform 0.65s cubic-bezier(0.77,0,0.175,1); overflow-y:auto;">
+
+  <!-- Close button -->
+  <button onclick="closeResidence()" style="position:fixed; top:28px; right:40px; background:none; border:none; cursor:pointer; font-family:var(--sans); font-size:11px; font-weight:400; letter-spacing:0.18em; text-transform:uppercase; color:#888; display:flex; align-items:center; gap:10px; z-index:201; transition:color 0.2s;" onmouseover="this.style.color='#1a1a1a'" onmouseout="this.style.color='#888'">
+    Close &nbsp;×
+  </button>
+
+  <!-- Header label -->
+  <div style="position:fixed; top:28px; left:40px; font-family:var(--sans); font-size:11px; font-weight:400; letter-spacing:0.22em; text-transform:uppercase; color:#aaa; z-index:201;">
+    Pelagos — City Map
+  </div>
+
+  <!-- Content -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; padding:100px 80px 80px 80px; min-height:100vh;">
+    <div>
+      <div style="font-size:10px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:#999; margin-bottom:16px; font-family:var(--sans);">Pelagic City - Top Level</div>
+      <h2 style="font-family:var(--serif); font-size:clamp(48px,5vw,80px); font-weight:300; line-height:1.02; color:#1a1a1a; margin-bottom:40px;">Abyssal<br>Residence</h2>
+
+      <table style="width:100%; border-collapse:collapse; margin-bottom:36px;">
+        <tr style="border-top:1px solid #d0ccc7;">
+          <td style="font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:#888; padding:16px 0; width:55%; font-family:var(--sans);">Interior Area</td>
+          <td style="font-size:13px; font-weight:300; color:#1a1a1a; padding:16px 0; font-family:var(--sans);">4,200 sq ft &ensp;/&ensp; 390 m²</td>
+        </tr>
+        <tr style="border-top:1px solid #d0ccc7;">
+          <td style="font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:#888; padding:16px 0; font-family:var(--sans);">Ocean Terrace</td>
+          <td style="font-size:13px; font-weight:300; color:#1a1a1a; padding:16px 0; font-family:var(--sans);">820 sq ft &ensp;/&ensp; 76 m²</td>
+        </tr>
+        <tr style="border-top:1px solid #d0ccc7;">
+          <td style="font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:#888; padding:16px 0; font-family:var(--sans);">Exposure</td>
+          <td style="font-size:13px; font-weight:300; color:#1a1a1a; padding:16px 0; font-family:var(--sans);">N, E, S, W — 360°</td>
+        </tr>
+        <tr style="border-top:1px solid #d0ccc7;">
+          <td style="font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:#888; padding:16px 0; font-family:var(--sans);">Bedrooms / Bathrooms</td>
+          <td style="font-size:13px; font-weight:300; color:#1a1a1a; padding:16px 0; font-family:var(--sans);">3 / 4</td>
+        </tr>
+        <tr style="border-top:1px solid #d0ccc7; border-bottom:1px solid #d0ccc7;">
+          <td style="font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:#888; padding:16px 0; font-family:var(--sans);">Depth</td>
+          <td style="font-size:13px; font-weight:300; color:#1a1a1a; padding:16px 0; font-family:var(--sans);">−18 m below surface</td>
+        </tr>
+      </table>
+
+      <div style="font-size:10px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:#888; margin-bottom:16px; font-family:var(--sans);">Features</div>
+      <ul style="list-style:none; padding:0; margin:0 0 48px 0;">
+        <li style="font-size:13px; font-weight:300; color:#555; padding:7px 0; border-top:1px solid #ece8e3; font-family:var(--sans);">· Full-panoramic curved glass hull walls</li>
+        <li style="font-size:13px; font-weight:300; color:#555; padding:7px 0; border-top:1px solid #ece8e3; font-family:var(--sans);">· Private moon pool and dive access</li>
+        <li style="font-size:13px; font-weight:300; color:#555; padding:7px 0; border-top:1px solid #ece8e3; font-family:var(--sans);">· Bioluminescent reef garden at entry</li>
+        <li style="font-size:13px; font-weight:300; color:#555; padding:7px 0; border-top:1px solid #ece8e3; font-family:var(--sans);">· Dedicated marine research alcove</li>
+        <li style="font-size:13px; font-weight:300; color:#555; padding:7px 0; border-top:1px solid #ece8e3; border-bottom:1px solid #ece8e3; font-family:var(--sans);">· Private submarine dock</li>
+      </ul>
+
+      <button onclick="closeResidence()" style="font-family:var(--sans); font-size:11px; font-weight:400; letter-spacing:0.2em; text-transform:uppercase; color:#1a1a1a; border:1px solid rgba(0,0,0,0.3); padding:14px 32px; background:transparent; cursor:pointer; transition:background 0.3s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">← Return to Pelagos</button>
+    </div>
+
+    <!-- Floor plan placeholder -->
+    <div style="position:sticky; top:100px; height:70vh;">
+      <div style="width:100%; height:100%; background:url('uploads/IMG_0906 1.png') center center / cover no-repeat; border:1px solid #d0ccc7;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openResidence() {
+    document.getElementById('residence-overlay').style.transform = 'translateY(0)';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeResidence() {
+    document.getElementById('residence-overlay').style.transform = 'translateY(100%)';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeResidence();
+  });
+</script>
+
+<div id="overview-backdrop" onclick="toggleOverview()"></div>
+<button id="overview-toggle" onclick="toggleOverview()" style="position: fixed; bottom: 40px; right: 40px; z-index: 9999; font-family: var(--sans); font-size: 10px; font-weight: 400; letter-spacing: 2.42px; text-transform: uppercase; color: #f0ede8; background: transparent; border: none; width: 81px; padding: 12px 0; cursor: pointer; opacity: 1">Overview</button>
+
+</body>
+</html>
