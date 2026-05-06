@@ -445,28 +445,6 @@
     line-height: 1.5;
   }
 
-  .overview-img {
-    width: 100%;
-    height: 140px;
-    background: url('uploads/pasted-1777134688126-0.png') center center / cover no-repeat;
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .overview-img::after {
-    content: attr(data-label);
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--sans);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.2);
-  }
-
   .overview-body {
     padding: 16px 16px 20px;
     flex: 1;
@@ -1248,12 +1226,11 @@
 </div>
 
 <!-- OVERVIEW PANEL -->
-<div id="overview-panel" class="hidden" style="height: 530px; padding: 0px 0px 155.333px; margin: 0px 0px 8.66675px">
+<div id="overview-panel" class="hidden">
   <div class="overview-header">
     <span>Overview</span>
     <button class="overview-close" onclick="toggleOverview()">×</button>
   </div>
-  <div class="overview-img" id="overview-img" data-label="Visual Placeholder" style="height: 170px"></div>
   <div class="overview-body">
     <div class="overview-section-label" id="ov-section">01 — Sanctuary</div>
     <div class="overview-title" id="ov-title">Humanity's Next Frontier</div>
@@ -1442,7 +1419,6 @@
     document.getElementById('ov-title').textContent = d.title;
     document.getElementById('ov-desc').textContent = d.desc;
     const ctaEl = document.getElementById('ov-cta'); if (ctaEl) ctaEl.textContent = d.cta;
-    document.getElementById('overview-img').style.background = d.imgColor;
   }
 
   function updateUI(index) {
