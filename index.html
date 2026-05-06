@@ -363,24 +363,49 @@
   /* ── OVERVIEW PANEL ── */
   #overview-panel {
     position: fixed;
-    top: 100px;
-    right: 36px;
-    width: 342px;
-    height: 601px;
+    top: 80px;
+    right: 24px;
+    bottom: 80px;
+    width: min(320px, calc(100vw - 32px));
     background: rgba(8,14,32,0.97);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.10);
-    border-bottom: none;
     z-index: 110;
     transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     transform: translateX(0);
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    /* hide scrollbar across all browsers */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  #overview-panel::-webkit-scrollbar { display: none; }
   #overview-panel.hidden {
-    transform: translateX(calc(100% + 36px));
+    transform: translateX(calc(100% + 24px));
     pointer-events: none;
+  }
+
+  /* Mobile: slide up from bottom instead */
+  @media (max-width: 600px) {
+    #overview-panel {
+      top: auto;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      max-height: 80vh;
+      border-radius: 16px 16px 0 0;
+      border-bottom: none;
+    }
+    #overview-panel.hidden {
+      transform: translateY(calc(100% + 24px));
+    }
+    #overview-toggle {
+      bottom: 24px !important;
+      right: 24px !important;
+    }
   }
 
   .overview-header {
@@ -464,7 +489,6 @@
     color: rgba(240,237,232,0.55);
     margin-bottom: 20px;
     white-space: pre-line;
-  }
   }
 
   /* ── OVERVIEW TOGGLE ── */
@@ -958,9 +982,227 @@
     letter-spacing: 0.02em;
     margin-bottom: 40px;
   }
+
+  /* ── LOADING SCREEN ── */
+  #loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
+  }
+  #loading-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #logo-wrapper {
+    position: relative;
+    width: 110px;
+    height: 110px;
+  }
+  /* ghost outline layer */
+  #logo-ghost {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.12;
+  }
+  /* fill layer — sweeps up from bottom */
+  #logo-fill {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: inset(100% 0 0 0);
+    animation: logoFill 2s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
+  }
+  @keyframes logoFill {
+    0%   { clip-path: inset(100% 0 0 0); }
+    100% { clip-path: inset(0%   0 0 0); }
+  }
+
+  /* ── INTRO OVERLAY ── */
+  #intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 1.4s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  #intro-overlay.dismissed {
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+  #intro-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  /* Blurred gradient band at the top — hidden until 5 s */
+  #intro-top-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 2;
+    height: 160px;
+    background: linear-gradient(
+      180deg,
+      rgba(4,9,26,0.72) 0%,
+      rgba(4,9,26,0.18) 70%,
+      rgba(4,9,26,0.00) 100%
+    );
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    -webkit-mask-image: linear-gradient(180deg, black 40%, transparent 100%);
+    mask-image: linear-gradient(180deg, black 40%, transparent 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  #intro-top-bar.visible {
+    opacity: 1;
+  }
+
+  /* Enter button — centre-bottom */
+  #intro-content {
+    position: absolute;
+    bottom: 72px; left: 0; right: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+  }
+  #intro-content.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  #enter-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    background: var(--white);
+    transition: transform 0.3s ease, background 0.3s;
+  }
+  #enter-btn:hover {
+    transform: scale(1.07);
+    background: rgba(240,237,232,0.9);
+  }
+
+  /* bottom vignette only */
+  #intro-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(4,9,26,0.6) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .intro-hint {
+    display: none;
+  }
+  #intro-mute {
+    position: absolute;
+    bottom: 36px;
+    right: 40px;
+    z-index: 3;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.45);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: color 0.25s, border-color 0.25s;
+  }
+  #intro-mute:hover {
+    color: var(--white);
+    border-color: rgba(255,255,255,0.45);
+  }
+  #intro-skip {
+    position: absolute;
+    bottom: 36px;
+    left: 40px;
+    z-index: 3;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.3);
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 9px 0;
+    transition: color 0.25s;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease, color 0.25s;
+  }
+  #intro-skip.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  #intro-skip:hover { color: rgba(255,255,255,0.65); }
 </style>
 </head>
 <body>
+
+<!-- ── LOADING SCREEN ── -->
+<div id="loading-screen">
+  <div id="logo-wrapper">
+    <img id="logo-ghost" src="uploads/PelagosLOGO1024x1024.png" alt="">
+    <img id="logo-fill"  src="uploads/PelagosLOGO1024x1024.png" alt="Pelagos">
+  </div>
+</div>
+
+<!-- ── INTRO OVERLAY ── -->
+<div id="intro-overlay">
+  <video id="intro-video" autoplay muted playsinline preload="auto">
+    <source src="uploads/intro-video.mp4" type="video/mp4">
+  </video>
+
+  <!-- blurred top gradient band -->
+  <div id="intro-top-bar"></div>
+
+  <!-- enter button (top-right, fades in on video end) -->
+  <div id="intro-content">
+    <button id="enter-btn">Enter Experience</button>
+  </div>
+
+  <!-- bottom vignette -->
+  <div id="intro-vignette"></div>
+
+  <button id="intro-mute">♪ Unmute</button>
+  <button id="intro-skip">Skip →</button>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -1352,6 +1594,106 @@
   }
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeResidence();
+  });
+</script>
+
+<script>
+  // ── LOADING SCREEN ──
+  const loadingScreen = document.getElementById('loading-screen');
+
+  // Logo fill animation is 0.6s delay + 2s = 2.6s total
+  // Hold for 0.6s then fade out the loading screen
+  setTimeout(() => {
+    loadingScreen.classList.add('fade-out');
+    setTimeout(() => { loadingScreen.style.display = 'none'; }, 1000);
+  }, 3400);
+
+  // ── INTRO OVERLAY ──
+  const introOverlay  = document.getElementById('intro-overlay');
+  const introVideo    = document.getElementById('intro-video');
+  const introContent  = document.getElementById('intro-content');
+  const introTopBar   = document.getElementById('intro-top-bar');
+  const introSkip     = document.getElementById('intro-skip');
+  const introMuteBtn  = document.getElementById('intro-mute');
+  const enterBtn      = document.getElementById('enter-btn');
+  let introActive     = true;
+  let isMuted         = true;
+
+  // Fade in the blurred top bar after 6 s
+  setTimeout(() => { introTopBar.classList.add('visible'); }, 6000);
+
+  function showEnterPrompt() {
+    if (!introContent.classList.contains('visible')) {
+      introContent.classList.add('visible');
+    }
+  }
+
+  function enterExperience() {
+    if (!introActive) return;
+    introActive = false;
+    introOverlay.classList.add('dismissed');
+    // Clean up video after transition
+    setTimeout(() => {
+      introOverlay.style.display = 'none';
+      introVideo.pause();
+      introVideo.src = '';
+    }, 1400);
+  }
+
+  // Show enter prompt when video ends
+  introVideo.addEventListener('ended', showEnterPrompt);
+
+  // Show "Skip" after 3 s so user isn't trapped
+  setTimeout(() => { introSkip.classList.add('visible'); }, 3000);
+
+  // Fallback: show enter prompt after 12 s if video stalls
+  const fallbackTimer = setTimeout(showEnterPrompt, 12000);
+  introVideo.addEventListener('ended', () => clearTimeout(fallbackTimer));
+
+  // Video error → show enter immediately
+  introVideo.addEventListener('error', () => {
+    clearTimeout(fallbackTimer);
+    showEnterPrompt();
+    introSkip.classList.add('visible');
+  });
+
+  // Button click
+  enterBtn.addEventListener('click', enterExperience);
+  introSkip.addEventListener('click', enterExperience);
+
+  // Mute toggle
+  function toggleMute() {
+    isMuted = !isMuted;
+    introVideo.muted = isMuted;
+    introMuteBtn.textContent = isMuted ? '♪ Unmute' : '♪ Mute';
+  }
+  introMuteBtn.addEventListener('click', toggleMute);
+
+  // Swipe up to enter (mobile)
+  let touchStartY = 0;
+  introOverlay.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  introOverlay.addEventListener('touchend', (e) => {
+    const deltaY = touchStartY - e.changedTouches[0].clientY;
+    if (deltaY > 60 && introContent.classList.contains('visible')) {
+      enterExperience();
+    }
+  }, { passive: true });
+
+  // Mouse wheel / scroll over overlay → enter once prompt is visible
+  introOverlay.addEventListener('wheel', (e) => {
+    if (e.deltaY > 30 && introContent.classList.contains('visible')) {
+      enterExperience();
+    }
+  }, { passive: true });
+
+  // Space / Enter key → enter once prompt is visible
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === ' ' || e.key === 'Enter') && introActive && introContent.classList.contains('visible')) {
+      e.preventDefault();
+      enterExperience();
+    }
   });
 </script>
 
