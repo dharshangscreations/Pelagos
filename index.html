@@ -446,7 +446,7 @@
   }
 
   .overview-body {
-    padding: 16px 16px 20px;
+    padding: 20px 20px 24px;
     flex: 1;
   }
   .overview-section-label {
@@ -454,19 +454,25 @@
   }
   .overview-title {
     font-family: var(--serif);
-    font-size: 26px;
+    font-size: 34px;
     font-weight: 300;
-    line-height: 1.15;
-    margin-bottom: 12px;
+    line-height: 1.12;
+    margin-bottom: 16px;
     color: var(--white);
   }
   .overview-desc {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 300;
-    line-height: 1.65;
+    line-height: 1.7;
     color: rgba(240,237,232,0.55);
     margin-bottom: 20px;
     white-space: pre-line;
+  }
+
+  /* Keep sizes tighter on mobile */
+  @media (max-width: 600px) {
+    .overview-title { font-size: 26px; }
+    .overview-desc  { font-size: 12px; }
   }
 
   /* ── OVERVIEW TOGGLE ── */
